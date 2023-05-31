@@ -16,12 +16,6 @@ datasource db {
     relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -39,6 +33,7 @@ model Account {
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
@@ -47,6 +42,8 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    
+    @@index([userId])
 }
 
 model User {
@@ -57,6 +54,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    likes         Like[]
 }
 
 model VerificationToken {
@@ -72,5 +70,16 @@ model Project {
     project_name String
     username     String
     logo_url     String
-    like         Int
+    likes        Like[]
+}
+
+model Like {
+    userId      String
+    projectId   String
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+    @@id([userId, projectId])
+    @@index([userId])
+    @@index([projectId])
 }
