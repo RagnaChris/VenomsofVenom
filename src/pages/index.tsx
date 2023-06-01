@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   return <>
@@ -15,7 +16,7 @@ const Home: NextPage = () => {
           <p className="px-16 pb-28">Find out the most trending NFTs on Venom, their utilities and how the venom community are hyped about each NFT project.</p>
       </div>
       <br></br><br></br><br></br>
-      <h1 className="text-center">Powered by `Venom`</h1>
+      <h1 className="text-center flex justify-center">Powered by <Image src="/assets/venom.png" alt="Venoms of Venom" width={50} height={50} /></h1>
     </div>
   </>
 };

@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
     previewFeatures = ["jsonProtocol"]
 }
 
@@ -42,7 +42,7 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    
+
     @@index([userId])
 }
 
@@ -52,6 +52,7 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String?
+    admin         Boolean
     accounts      Account[]
     sessions      Session[]
     likes         Like[]
@@ -66,18 +67,24 @@ model VerificationToken {
 }
 
 model Project {
-    id           String @id @default(cuid())
-    project_name String
-    username     String
-    logo_url     String
-    likes        Like[]
+    id          String   @id @default(cuid())
+    projectName String
+    username    String
+    twitterUrl  String
+    logoUrl     String
+    supply      String
+    mintPrice   String
+    mintDate    DateTime
+    likes       Like[]
+
+    @@unique([projectName, id])
 }
 
 model Like {
-    userId      String
-    projectId   String
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-    project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    userId    String
+    projectId String
+    user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
     @@id([userId, projectId])
     @@index([userId])
