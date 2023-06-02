@@ -1,3 +1,4 @@
+import { TwitterApi } from "twitter-api-v2";
 import { z } from "zod";
 import {
   createTRPCRouter,
@@ -25,6 +26,7 @@ export const projectRouter = createTRPCRouter({
         select: {
           id: true,
           projectName: true,
+          username: true,
           twitterUrl: true,
           imageUrl: true,
           supply: true,
@@ -45,11 +47,25 @@ export const projectRouter = createTRPCRouter({
           nextCursor = { id: nextItem.id, projectName: nextItem.projectName };
         }
       }
-      return {
-        projects: data.map((project) => {
+
+      const twitterBearerToken = process.env.TWITTER_BEARER_TOKEN;
+      if (!twitterBearerToken) {
+        throw new Error("TWITTER_BEARER_TOKEN environment variable is missing");
+      }
+
+      const twitterClient = new TwitterApi(twitterBearerToken);
+      const readOnlyClient = twitterClient.readOnly;
+      
+      const projects = await Promise.all(
+        data.map(async (project) => {
+          const user = await readOnlyClient.v2.userByUsername(
+            project.username
+          );
+
           return {
             id: project.id,
             projectName: project.projectName,
+            username: project.username,
             twitterUrl: project.twitterUrl,
             imageUrl: project.imageUrl,
             supply: project.supply,
@@ -57,8 +73,14 @@ export const projectRouter = createTRPCRouter({
             mintDate: project.mintDate,
             likeCount: project._count.likes,
             likedByMe: project.likes?.length > 0,
+            userProfileImageUrl: user.data.profile_image_url,
+            userFollowersCount: user.data.public_metrics?.followers_count,
           };
-        }),
+        })
+      );
+
+      return {
+        projects,
         nextCursor,
       };
     }),
@@ -76,6 +98,15 @@ export const projectRouter = createTRPCRouter({
     )
     .mutation(async ({ input: { projectName, username, twitterUrl, imageUrl, supply, mintPrice, mintDate }, ctx }) => {
       return await ctx.prisma.project.create({ data: {projectName, username, twitterUrl, imageUrl, supply, mintPrice, mintDate} });
+    }),
+  delete: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ input: { id }, ctx }) => {
+      return await ctx.prisma.project.delete({ where: { id: id } });
     }),
   toggleLike: protectedProcedure
     .input(z.object({ id: z.string() }))

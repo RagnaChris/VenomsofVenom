@@ -6,12 +6,15 @@ import { api } from "~/utils/api";
 const Projects: NextPage = () => {
   return (
     <>
-      <div className="relative overflow-x-auto mx-5">
+      <div className="relative mx-5 overflow-x-auto">
         {/* ToDo
             - Make Search bar
          */}
         <div className="mb-10 py-5">
-          <Link href="/create-project" className="float-right rounded-xl border border-transparent bg-green-400/10 py-1 pl-8 pr-6">
+          <Link
+            href="/create-project"
+            className="float-right rounded-xl border border-transparent bg-green-400/10 py-1 pl-8 pr-6"
+          >
             + List your Project
           </Link>
         </div>

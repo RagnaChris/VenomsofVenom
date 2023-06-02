@@ -24,10 +24,14 @@ export function TopNav() {
               <button onClick={() => void signIn()}>SignIn</button>
             </li>
           ) : (
+          <>
+            { user.admin && (
+              <Link href="/manage-projects">Manage Projects</Link>
+            )}
             <li>
               <button onClick={() => void signOut()}>SignOut</button>
             </li>
-          )}
+          </>)}
         </ul>
       </div>
     </nav>

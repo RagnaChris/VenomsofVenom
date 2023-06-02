@@ -8,6 +8,7 @@ import { Notify } from "notiflix";
 type Project = {
   id: string;
   projectName: string;
+  username: string;
   twitterUrl: string;
   imageUrl: string;
   supply: string;
@@ -15,6 +16,8 @@ type Project = {
   mintDate: Date;
   likeCount: number;
   likedByMe: boolean;
+  userProfileImageUrl: string | undefined;
+  userFollowersCount: number | undefined;
 };
 
 type InfiniteProjectListProp = {
@@ -71,7 +74,7 @@ export function InfiniteProjectList({
           {projects.map((project, index) => {
             const toggleLike = api.project.toggleLike.useMutation({
               onSuccess: () => {
-                Notify.success("Project created successfully!");
+                Notify.success("Project query success!");
               },
               onError: (event) => {
                 Notify.failure(event.message);
@@ -86,7 +89,7 @@ export function InfiniteProjectList({
                 <td className="text-bold">{index + 1}</td>
                 <td>
                   <Image
-                    src={project.imageUrl}
+                    src={project.userProfileImageUrl || project.imageUrl}
                     alt={project.projectName}
                     className="rounded-full"
                     width={20}
@@ -98,7 +101,7 @@ export function InfiniteProjectList({
                 <td>{project.mintPrice}</td>
                 <td className="flex items-center justify-center">
                   <AiOutlineTwitter className="fill-green-500" />
-                  <span>Twitter Followers</span>
+                  <span>project.userFollowersCount</span>
                 </td>
                 <td>
                   <LikeButton
