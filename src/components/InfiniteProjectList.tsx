@@ -16,8 +16,8 @@ type Project = {
   mintDate: Date;
   likeCount: number;
   likedByMe: boolean;
-  userProfileImageUrl: string | undefined;
-  userFollowersCount: number | undefined;
+  // userProfileImageUrl: string | undefined;
+  // userFollowersCount: number | undefined;
 };
 
 type InfiniteProjectListProp = {
@@ -89,7 +89,7 @@ export function InfiniteProjectList({
                 <td className="text-bold">{index + 1}</td>
                 <td>
                   <Image
-                    src={project.userProfileImageUrl || project.imageUrl}
+                    src={project.imageUrl}
                     alt={project.projectName}
                     className="rounded-full"
                     width={20}
@@ -101,7 +101,7 @@ export function InfiniteProjectList({
                 <td>{project.mintPrice}</td>
                 <td className="flex items-center justify-center">
                   <AiOutlineTwitter className="fill-green-500" />
-                  <span>project.userFollowersCount</span>
+                  <span>None</span>
                 </td>
                 <td>
                   <LikeButton

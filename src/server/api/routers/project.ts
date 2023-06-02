@@ -48,19 +48,19 @@ export const projectRouter = createTRPCRouter({
         }
       }
 
-      const twitterBearerToken = process.env.TWITTER_BEARER_TOKEN;
-      if (!twitterBearerToken) {
-        throw new Error("TWITTER_BEARER_TOKEN environment variable is missing");
-      }
+      // const twitterBearerToken = process.env.TWITTER_BEARER_TOKEN;
+      // if (!twitterBearerToken) {
+      //   throw new Error("TWITTER_BEARER_TOKEN environment variable is missing");
+      // }
 
-      const twitterClient = new TwitterApi(twitterBearerToken);
-      const readOnlyClient = twitterClient.readOnly;
+      // const twitterClient = new TwitterApi(twitterBearerToken);
+      // const readOnlyClient = twitterClient.readOnly;
       
       const projects = await Promise.all(
         data.map(async (project) => {
-          const user = await readOnlyClient.v2.userByUsername(
-            project.username
-          );
+          // const user = await readOnlyClient.v2.userByUsername(
+          //   project.username
+          // );
 
           return {
             id: project.id,
@@ -73,8 +73,8 @@ export const projectRouter = createTRPCRouter({
             mintDate: project.mintDate,
             likeCount: project._count.likes,
             likedByMe: project.likes?.length > 0,
-            userProfileImageUrl: user.data.profile_image_url,
-            userFollowersCount: user.data.public_metrics?.followers_count,
+            // userProfileImageUrl: user.data.profile_image_url,
+            // userFollowersCount: user.data.public_metrics?.followers_count,
           };
         })
       );
