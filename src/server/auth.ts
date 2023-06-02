@@ -6,6 +6,7 @@ import {
   type DefaultSession,
 } from "next-auth";
 import TwitterProvider from "next-auth/providers/twitter";
+import { boolean } from "zod";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
 
@@ -25,10 +26,11 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 
-  // interface User {
+  interface User {
   //   // ...other properties
   //   // role: UserRole;
-  // }
+    admin: boolean;
+  }
 }
 
 /**
@@ -43,6 +45,7 @@ export const authOptions: NextAuthOptions = {
       user: {
         ...session.user,
         id: user.id,
+        admin: user.admin,
       },
     }),
   },
