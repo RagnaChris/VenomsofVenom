@@ -62,7 +62,7 @@ export const projectRouter = createTRPCRouter({
         nextCursor,
       };
     }),
-  create: publicProcedure
+  create: protectedProcedure
     .input(
       z.object({
         projectName: z.string(),
