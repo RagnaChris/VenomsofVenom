@@ -57,7 +57,7 @@ export const projectRouter = createTRPCRouter({
       // const readOnlyClient = twitterClient.readOnly;
       
       const projects = await Promise.all(
-        data.map(async (project) => {
+        data.map((project) => {
           // const user = await readOnlyClient.v2.userByUsername(
           //   project.username
           // );
