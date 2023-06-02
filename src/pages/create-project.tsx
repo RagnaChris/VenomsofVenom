@@ -4,7 +4,7 @@ import NewProjectForm from "~/components/NewProjectForm";
 
 const CreateProject: NextPage = () => {
     const session = useSession();
-    if (session.status !== 'authenticated' || session.data.user.admin !== false) {
+    if (session.status !== 'authenticated' || session.data.user.admin !== true) {
         return <h2>Check Discord</h2>
     }
 
