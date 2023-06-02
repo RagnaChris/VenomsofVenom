@@ -52,7 +52,7 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String?
-    admin         Boolean
+    admin         Boolean   @default(false)
     accounts      Account[]
     sessions      Session[]
     likes         Like[]
