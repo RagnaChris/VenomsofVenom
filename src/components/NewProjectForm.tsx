@@ -11,7 +11,7 @@ function Form() {
   const [projectName, setProjectName] = useState("");
   const [username, setUsername] = useState("");
   const [twitterUrl, setTwitterUrl] = useState("");
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFile, setImageFile] = useState<File|null>(null);
   const [supply, setSupply] = useState("");
   const [mintPrice, setMintPrice] = useState("");
   const [mintDate, setMintDate] = useState("");
@@ -25,7 +25,7 @@ function Form() {
     },
   });
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     // if (!imageFile) {
@@ -46,6 +46,7 @@ function Form() {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
+    if (!file) return
     setImageFile(file);
   };
 
