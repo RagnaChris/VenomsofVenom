@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { AiFillLike, AiOutlineLike, AiOutlineTwitter } from "react-icons/Ai";
+import { AiFillLike, AiOutlineLike, AiOutlineTwitter } from "react-icons/ai";
 import { api } from "~/utils/api";
 import Image from "next/image";
 import { Notify } from "notiflix";
