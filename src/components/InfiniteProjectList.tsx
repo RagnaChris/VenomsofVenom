@@ -132,14 +132,14 @@ function LikeButton({
 }: LikeButtonProps) {
   const session = useSession();
   const LikeIcon = likedByMe ? AiFillLike : AiOutlineLike;
-  // if (session.status !== "authenticated") {
-  //   return (
-  //     <div className="flex justify-center items-center">
-  //       <LikeIcon />
-  //       <span>{likeCount}</span>
-  //     </div>
-  //   );
-  // }
+  if (session.status !== "authenticated") {
+    return (
+      <div className="flex justify-center items-center">
+        <LikeIcon />
+        <span>{likeCount}</span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center">
