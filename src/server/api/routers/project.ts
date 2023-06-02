@@ -26,7 +26,7 @@ export const projectRouter = createTRPCRouter({
           id: true,
           projectName: true,
           twitterUrl: true,
-          logoUrl: true,
+          imageUrl: true,
           supply: true,
           mintPrice: true,
           mintDate: true,
@@ -51,7 +51,7 @@ export const projectRouter = createTRPCRouter({
             id: project.id,
             projectName: project.projectName,
             twitterUrl: project.twitterUrl,
-            logoUrl: project.logoUrl,
+            imageUrl: project.imageUrl,
             supply: project.supply,
             mintPrice: project.mintPrice,
             mintDate: project.mintDate,
@@ -62,11 +62,21 @@ export const projectRouter = createTRPCRouter({
         nextCursor,
       };
     }),
-  // create: protectedProcedure
-  //   .input(z.object({ content: z.string() }))
-  //   .mutation(async ({ input: { content }, ctx }) => {
-  //     return await ctx.prisma.project.create({ data: content });
-  //   }),
+  create: publicProcedure
+    .input(
+      z.object({
+        projectName: z.string(),
+        username: z.string(),
+        twitterUrl: z.string(),
+        imageUrl: z.string(),
+        supply: z.string(),
+        mintPrice: z.string(),
+        mintDate: z.date(),
+      })
+    )
+    .mutation(async ({ input: { projectName, username, twitterUrl, imageUrl, supply, mintPrice, mintDate }, ctx }) => {
+      return await ctx.prisma.project.create({ data: {projectName, username, twitterUrl, imageUrl, supply, mintPrice, mintDate} });
+    }),
   toggleLike: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input: { id }, ctx }) => {

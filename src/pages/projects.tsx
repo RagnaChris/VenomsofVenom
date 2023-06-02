@@ -6,7 +6,7 @@ import { api } from "~/utils/api";
 const Projects: NextPage = () => {
   return (
     <>
-      <div className="relative overflow-x-auto">
+      <div className="relative overflow-x-auto mx-5">
         {/* ToDo
             - Make Search bar
          */}
@@ -15,22 +15,7 @@ const Projects: NextPage = () => {
             + List your Project
           </Link>
         </div>
-        <table className="w-full px-4 text-center ">
-          <thead>
-            <tr>
-              <th className="px-6 py-4"></th>
-              <th className="px-6 py-4"></th>
-              <th className="px-6 py-4 text-left">Project Name</th>
-              <th className="px-6 py-4">Supply</th>
-              <th className="px-6 py-4">Price</th>
-              <th className="px-6 py-4">Community</th>
-              <th className="px-6 py-4">Interest</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ViewProjects />
-          </tbody>
-        </table>
+        <ViewProjects />
       </div>
     </>
   );

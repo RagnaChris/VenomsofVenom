@@ -71,7 +71,7 @@ model Project {
     projectName String
     username    String
     twitterUrl  String
-    logoUrl     String
+    imageUrl     String
     supply      String
     mintPrice   String
     mintDate    DateTime
