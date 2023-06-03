@@ -30,6 +30,7 @@
     "react-icons": "^4.9.0",
     "react-infinite-scroll-component": "^6.1.0",
     "superjson": "1.12.2",
+    "twitter-api-sdk": "^1.2.1",
     "twitter-api-v2": "^1.15.0",
     "zod": "^3.21.4"
   },

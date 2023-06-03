@@ -1,8 +1,9 @@
-import { useSession } from "next-auth/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { api } from "~/utils/api";
 import Image from "next/image";
 import { Notify } from "notiflix";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 type Project = {
   id: string;
@@ -44,7 +45,7 @@ export function InfiniteProjects({
       hasMore={hasMore}
       loader={"Loading..."}
     >
-      <table className="mx-4 w-full px-4 text-center">
+      <table className="w-full px-4 text-center border-collapse">
         <tbody>
           {projects.map((project, index) => {
             const deleteProject = api.project.delete.useMutation({
@@ -60,13 +61,9 @@ export function InfiniteProjects({
               deleteProject.mutate({ id: project.id });
             }
 
-            function handleEdit() {
-              console.log("Edit..Not yet implemented!");
-            }
-
             return (
-              <tr key={project.id}>
-                <td>
+              <tr key={project.id} className="bg-green-300/10 px-3">
+                <td className="rounded-s-lg pl-4">
                   <Image
                     src={project.imageUrl}
                     alt={project.projectName}
@@ -76,17 +73,17 @@ export function InfiniteProjects({
                   />
                 </td>
                 <td className="text-left">{project.projectName}</td>
-                <td>
-                  <button
-                    className="rounded-lg border border-black bg-gradient-to-b from-green-500 via-emerald-400 to-cyan-300 px-5 py-4 text-center text-2xl font-bold text-black"
-                    onClick={handleEdit}
+                <td className="py-4">
+                  <Link
+                    className="-mr-28 w-28 rounded-lg border border-black bg-gradient-to-b from-green-500 via-emerald-400 to-cyan-300 text-center font-bold text-black"
+                    href={`/project/${project.id}`}
                   >
                     Edit
-                  </button>
+                  </Link>
                 </td>
-                <td>
+                <td className="rounded-e-lg">
                   <button
-                    className="mx-10 rounded-lg border border-x-emerald-300 border-b-teal-500 border-t-green-400 px-10 py-4 text-center text-2xl font-bold"
+                    className="-mr-10 w-28 rounded-lg border border-x-emerald-300 border-b-teal-500 border-t-green-400 text-center font-bold"
                     onClick={handleDelete}
                   >
                     Delete

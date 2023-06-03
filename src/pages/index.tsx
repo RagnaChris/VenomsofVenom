@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -14,9 +15,9 @@ const Home: NextPage = () => {
           <h2 className="text-2xl">Powered by Venoms of Venom NFT</h2>
           <br></br>
           <br></br>
-          <button className="rounded-lg border border-black bg-gradient-to-b from-green-500 via-emerald-400 to-cyan-300 px-5 py-4 text-center text-2xl font-bold text-black">
+          <Link href="/projects" className="rounded-lg border border-black bg-gradient-to-b from-green-500 via-emerald-400 to-cyan-300 px-5 py-4 text-center text-2xl font-bold text-black">
             Explore Trender
-          </button>
+          </Link>
           <button className="mx-10 rounded-lg border border-x-emerald-300 border-b-teal-500 border-t-green-400 px-10 py-4 text-center text-2xl font-bold">
             Buy a Venom
           </button>

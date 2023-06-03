@@ -16,8 +16,8 @@ type Project = {
   mintDate: Date;
   likeCount: number;
   likedByMe: boolean;
-  // userProfileImageUrl: string | undefined;
-  // userFollowersCount: number | undefined;
+  userProfileImageUrl: string | undefined;
+  userFollowersCount: number | undefined;
 };
 
 type InfiniteProjectListProp = {
@@ -58,16 +58,16 @@ export function InfiniteProjectList({
       hasMore={hasMore}
       loader={"Loading..."}
     >
-      <table className="mx-4 w-full px-4 text-center">
+      <table className="w-full px-2 text-center border-collapse">
         <thead>
           <tr>
-            <th className="px-6 py-4"></th>
-            <th className="px-6 py-4"></th>
-            <th className="px-6 py-4 text-left">Project Name</th>
-            <th className="px-6 py-4">Supply</th>
-            <th className="px-6 py-4">Price</th>
-            <th className="px-6 py-4">Community</th>
-            <th className="px-6 py-4">Interest</th>
+            <th className="px-3 py-4"></th>
+            <th className="px-3 py-4"></th>
+            <th className="px-4 py-4 text-left">Project Name</th>
+            <th className="px-2 py-4">Supply</th>
+            <th className="px-2 py-4">Price</th>
+            <th className="px-2 py-4">Community</th>
+            <th className="px-2 py-4">Interest</th>
           </tr>
         </thead>
         <tbody>
@@ -85,11 +85,11 @@ export function InfiniteProjectList({
               toggleLike.mutate({ id: project.id });
             }
             return (
-              <tr key={project.id}>
-                <td className="text-bold">{index + 1}</td>
+              <tr key={project.id} className="bg-green-300/10">
+                <td className="text-bold rounded-l-lg">{index + 1}</td>
                 <td>
                   <Image
-                    src={project.imageUrl}
+                    src={project.userProfileImageUrl || project.imageUrl}
                     alt={project.projectName}
                     className="rounded-full"
                     width={20}
@@ -101,9 +101,9 @@ export function InfiniteProjectList({
                 <td>{project.mintPrice}</td>
                 <td className="flex items-center justify-center">
                   <AiOutlineTwitter className="fill-green-500" />
-                  <span>None</span>
+                  <span>{project.userFollowersCount}</span>
                 </td>
-                <td>
+                <td className="rounded-r-lg">
                   <LikeButton
                     onClick={handleToggleLike}
                     isLoading={toggleLike.isLoading}
