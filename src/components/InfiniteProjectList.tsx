@@ -58,7 +58,7 @@ export function InfiniteProjectList({
       hasMore={hasMore}
       loader={"Loading..."}
     >
-      <table className="w-full px-2 text-center border-collapse">
+      <table className="w-full px-2 text-center border-separate border-spacing-y-3">
         <thead>
           <tr>
             <th className="px-3 py-4"></th>

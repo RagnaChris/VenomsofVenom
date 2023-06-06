@@ -45,7 +45,7 @@ export function InfiniteProjects({
       hasMore={hasMore}
       loader={"Loading..."}
     >
-      <table className="w-full px-4 text-center border-collapse">
+      <table className="w-full px-4 text-center border-separate border-spacing-y-3">
         <tbody>
           {projects.map((project, index) => {
             const deleteProject = api.project.delete.useMutation({
