@@ -2,7 +2,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { api } from "~/utils/api";
 import Image from "next/image";
 import { Notify } from "notiflix";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 type Project = {
@@ -45,7 +44,7 @@ export function InfiniteProjects({
       hasMore={hasMore}
       loader={"Loading..."}
     >
-      <table className="w-full px-4 text-center border-separate border-spacing-y-3">
+      <table className="w-full border-separate border-spacing-y-3 px-4 text-center">
         <tbody>
           {projects.map((project, index) => {
             const deleteProject = api.project.delete.useMutation({
