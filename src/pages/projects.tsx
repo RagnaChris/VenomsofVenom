@@ -19,7 +19,7 @@ const Projects: NextPage = () => {
         <div className="mb-10 flex justify-end gap-5 py-5">
           <div className="flex">
             <input
-              className="rounded-l-md bg-green-300/10 px-3"
+              className="w-full rounded-l-md bg-green-300/10 px-3 text-xs md:text-base"
               placeholder="Search Project"
               type="text"
               id="findName"
@@ -35,9 +35,10 @@ const Projects: NextPage = () => {
           </div>
           <Link
             href="/create-project"
-            className="float-right rounded-xl border border-transparent bg-green-400/10 py-1 pl-8 pr-6"
+            className="float-right flex rounded-xl border border-transparent bg-green-400/10 py-1 pl-8 pr-6 text-xs md:text-base"
           >
-            + List your Project
+            <span className="mr-2 self-center text-xl md:text-sm">+</span>
+            <p>List your Project</p>
           </Link>
         </div>
         <ViewProjects findName={findName} />

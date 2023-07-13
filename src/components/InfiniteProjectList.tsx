@@ -58,7 +58,7 @@ export function InfiniteProjectList({
       hasMore={hasMore}
       loader={"Loading..."}
     >
-      <table className="w-full px-2 text-center border-separate border-spacing-y-3">
+      <table className="w-full border-separate border-spacing-y-3 px-2 text-center">
         <thead>
           <tr>
             <th className="px-3 py-4"></th>
@@ -91,7 +91,7 @@ export function InfiniteProjectList({
                   <Image
                     src={project.userProfileImageUrl || project.imageUrl}
                     alt={project.projectName}
-                    className="rounded-full"
+                    className="hidden rounded-full"
                     width={20}
                     height={20}
                   />
@@ -137,7 +137,7 @@ function LikeButton({
   const LikeIcon = likedByMe ? AiFillLike : AiOutlineLike;
   if (session.status !== "authenticated") {
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <LikeIcon />
         <span>{likeCount}</span>
       </div>
